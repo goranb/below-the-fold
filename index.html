@@ -17,7 +17,7 @@ document.onreadystatechange = function () {
             imgs.forEach(
                 function(img) {
                     img.setAttribute('data-src', img.src);
-                    img.src = img.src.replace(/^.*[\\\/]/, '$&lofi'); // inject lo-fi version
+                    img.src = img.src.replace('images', 'images/lofi'); // inject lo-fi version
                 }
             );
             break;
@@ -54,12 +54,12 @@ function loadAboveTheFold(){
 </head>
 <body style="background-color: #999;">
 
-<img src="1.png" width="800" height="600" style="background-color: #ddd;">
-<img src="2.png" width="800" height="600" style="background-color: #ddd;">
-<img src="3.png" width="800" height="600" style="background-color: #ddd;">
-<img src="4.png" width="800" height="600" style="background-color: #ddd;">
-<img src="5.png" width="800" height="600" style="background-color: #ddd;">
-<img src="6.png" width="800" height="600" style="background-color: #ddd;">
+<img src="images/1.jpg" width="800" height="600" style="background-color: #ddd;">
+<img src="images/2.jpg" width="800" height="600" style="background-color: #ddd;">
+<img src="images/3.jpg" width="800" height="600" style="background-color: #ddd;">
+<img src="images/4.jpg" width="800" height="600" style="background-color: #ddd;">
+<img src="images/5.jpg" width="800" height="600" style="background-color: #ddd;">
+<img src="images/6.jpg" width="800" height="600" style="background-color: #ddd;">
 
 <script>
 // test for which images have been loaded
