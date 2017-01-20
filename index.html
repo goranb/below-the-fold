@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Imageload</title>
+<script>
+
+document.onreadystatechange = function () {
+    console.log(document.readyState);
+
+    switch (document.readyState) {
+        case 'loading':
+            // doesn't seem to be triggered as it is the initial state
+            break;
+        case 'interactive':
+            var imgs = document.querySelectorAll("img");
+            imgs.forEach(
+                function(img) {
+                    img.setAttribute('data-src', img.src);
+                    img.src = img.src.replace(/^.*[\\\/]/, '$&lofi'); // inject lo-fi version
+                }
+            );
+            break;
+        case 'complete':
+            loadAboveTheFold();
+            document.onscroll = function() {
+                loadAboveTheFold();
+            }
+            break;
+        default:
+            console.error('Uknowin readyState: ' + document.readyState);
+    }
+}
+
+function loadAboveTheFold(){
+    var imgs = document.querySelectorAll("img");
+    imgs.forEach(
+        function(img) {
+            var src;
+            if (src = img.getAttribute('data-src')){
+                var rect = img.getBoundingClientRect();
+                var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+                if (rect.top < h) {
+                    img.src = img.getAttribute('data-src');
+                    img.removeAttribute('data-src');
+                    console.log('triggering: ' + img.src);
+                }
+            }
+        }
+    );
+}
+
+</script>
+</head>
+<body style="background-color: #999;">
+
+<img src="1.png" width="800" height="600" style="background-color: #ddd;">
+<img src="2.png" width="800" height="600" style="background-color: #ddd;">
+<img src="3.png" width="800" height="600" style="background-color: #ddd;">
+<img src="4.png" width="800" height="600" style="background-color: #ddd;">
+<img src="5.png" width="800" height="600" style="background-color: #ddd;">
+<img src="6.png" width="800" height="600" style="background-color: #ddd;">
+
+<script>
+// test for which images have been loaded
+var imgs = document.querySelectorAll("img");
+imgs.forEach(
+    function(img) {
+        img.addEventListener('load', function(){
+            console.log('loaded: ' + img.src);
+        });
+    }
+);
+</script>
+
+</body>
+</html>
